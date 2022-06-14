@@ -23,6 +23,7 @@ const ModelforAdd = () => {
         const { loginform } = data;
         const { errors } = data
         loginform[e.target.name] = e.target.value;
+        
         if (loginform.first_name) {
             errors.first_name = ""
         }

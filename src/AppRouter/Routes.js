@@ -10,6 +10,7 @@ import Profile from "../Components/profile";
 
 
 
+
 export default function Router() {
     const token= localStorage.getItem('token')
    
@@ -21,6 +22,7 @@ export default function Router() {
              <Route path="/login" element={<PublicRoute><Login/></PublicRoute>} />
              <Route path="/dashboard" element={<PrivateRoute><Dashboard/></PrivateRoute>} />
              <Route path="/dashboard/:id" element={<PrivateRoute><Profile/></PrivateRoute>} />
+            
 
              
    
