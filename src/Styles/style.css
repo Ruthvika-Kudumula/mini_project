@@ -10,15 +10,64 @@ table td {
     padding-top: 20px;
     
 }
+ 
+ .user_dts {
+
+    width: 200px;
+    height: 200px;
+    text-align: center;
+    padding-top: 20px;
+    font-weight: bold;
+}
+
+.user_dtsr {
+
+    color: blue;
+    text-align: center;
+    padding-top: 20px;
+    font-weight: bold;
+}
 
 .center {
-
     margin: auto;
-    width: 100%;
-    border: 3px solid #73AD21;
     padding: 10px;
-  }
 
- th{
-    justify-content: space-between;
- } 
+}
+
+.text {
+    /* padding: 5px; */
+}
+
+.text2 {
+    padding-right: -10px;
+}
+
+.table {
+    margin: auto;
+    width: 50% !important;
+}
+
+.login_btn {
+    display: flex;
+    justify-content: center;
+}
+
+.center2 {
+    display: flex;
+    justify-content: center;
+    position: fixed;
+   bottom: 200px;
+    left: 600px;
+}
+.img_rad {
+    border-radius: 100%;
+  }
+  .logout{
+    position: fixed;
+    right: 50px;
+
+  }
+  .img_rad2 {
+    border-radius: 100%;
+    height: 50px;
+  }

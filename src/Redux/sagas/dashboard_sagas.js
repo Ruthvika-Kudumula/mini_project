@@ -11,7 +11,6 @@ function* dashboardData() {
         const url = "https://reqres.in/api/users"
         const res = yield axios.get(url)
         yield put({ type: DashboardTypes.USER_DATA_REQUEST_SUCCESS, data: res.data.data })
-        console.log('dash_saga', res.data.data)
     }
     catch (e) {
 
@@ -21,11 +20,9 @@ function* dashboardData() {
 function* Post({ data, callback }) {
     yield put({ type: LoaderTypes.LOADER_START });
     try {
-        console.log("payload", data);
         const url = "https://reqres.in/api/users";
         // const url = `${process.env.REACT_APP_API_URL}/${URI.LOGIN}`;
         const res = yield axios.post(url, data);
-        console.log("response", res.data);
         yield put({ type: AuthTypes.POST_SUCCESS, data: res.data });
         callback();
     } catch (e) {
@@ -33,7 +30,26 @@ function* Post({ data, callback }) {
     }
     yield put({ type: LoaderTypes.LOADER_STOP });
 }
+//user request by id
+function* userRequest(data, callback) {
+    console.log('da', data.data.id);
+    yield put({ type: LoaderTypes.LOADER_START })
+
+    try {
+        const url = `https://reqres.in/api/users/${data.data.id}`
+        // // const url = `${process.env.REACT_APP_API_URL}/users`
+        const res = yield axios.get(url)
+        yield put({ type: DashboardTypes.PERSON_REQUST_SUCCESS,data:res.data.data })
+        callback(true);
+    }
+    catch (e) {
+
+    }
+    yield put({ type: LoaderTypes.LOADER_STOP });
+}
+
 export default function* dashboardSaga() {
     yield takeEvery(DashboardTypes.USER_DATA_REQUEST, dashboardData);
+    yield takeEvery(DashboardTypes.PERSON_REQUST, userRequest);
     yield takeEvery(AuthTypes.POST_REQUEST, Post);
 }

@@ -23,6 +23,19 @@ export default function DashboardReducer(state = initialState, action = null) {
         ...state,
       };
     }
+    case DashboardTypes.PERSON_REQUST_SUCCESS: {
+      return {
+        ...state,
+        Persondata: action.data
+      };
+    }
+    case DashboardTypes.DELETE_USER_SUCCESS:{
+      console.log('act',action.data);
+      state.UserDataRequests=action.data
+      return{
+        ...state
+      }
+    }
     default:
       return state;
   }

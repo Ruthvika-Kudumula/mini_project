@@ -49,19 +49,13 @@ const ModelforAdd = () => {
         setData({ ...data, loginform: loginform })
         setShow(true);
     }
-    const showPass = () => {
-        const elementRef = dataRef.current.getAttribute("type")
-        if (elementRef === "password") {
-            dataRef.current.setAttribute("type", "text")
-        } else {
-            dataRef.current.setAttribute("type", "password")
-        }
-        console.log(elementRef);
+    const close=()=>{
+        setShow(true);
     }
+
     const { loginform } = data
     const { errors } = data
     const submitFn = () => {
-        console.log("loginform", loginform);
         if (!loginform.first_name) {
             errors.first_name = "Enter first name"
         }
@@ -103,7 +97,7 @@ const ModelforAdd = () => {
             </Button>
 
             <Modal show={show} onHide={handleClose} animation={false}>
-                <Modal.Header closeButton>
+                <Modal.Header closeButton onClick={close}>
                     <Modal.Title> Add New User</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
