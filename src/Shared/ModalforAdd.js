@@ -6,19 +6,32 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { AuthTypes } from "../Redux/action_types/auth_types";
 
+
+
 const ModelforAdd = () => {
-    const dataRef = useRef();
+    const ref = useRef();
     const [data, setData] = useState({
         loginform: {
             first_name: '',
             last_name: '',
-            email: ''
-        }, errors: {
+            email: '',
+            avatar: ''
+        },
+        errors: {
             first_name: '',
             last_name: '',
-            email: ''
+            email: '',
+            fileMessage: '',
         }
     })
+    var url = ''
+    const saveImage = (event) => {
+        const { files } = event.target;
+        const localImageUrl = window.URL.createObjectURL(files[0]);
+        console.log("url", localImageUrl)
+        setData({ ...data, loginform: { ...data.loginform, avatar: localImageUrl } })
+    }
+
     const handleInput = (e) => {
         const { loginform } = data;
         const { errors } = data
@@ -40,22 +53,27 @@ const ModelforAdd = () => {
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => {
-        const loginform = {
-            first_name: '',
-            last_name: '',
-            email: '',
-            password: ''
-        }
-        setData({ ...data, loginform: loginform })
         setShow(true);
     }
-    const close=()=>{
+    const close = () => {
         setShow(true);
     }
 
+    const uploadClick = e => {
+        ref.current.click();
+    };
+
+
     const { loginform } = data
     const { errors } = data
-    const submitFn = () => {
+
+
+    const submitFn = (e) => {
+        if (!loginform.avatar) {
+
+            errors.fileMessage = "image required"
+        }
+
         if (!loginform.first_name) {
             errors.first_name = "Enter first name"
         }
@@ -77,7 +95,9 @@ const ModelforAdd = () => {
         else {
             errors.email = ""
         }
-        if (loginform.first_name && loginform.last_name && loginform.email && !errors.email) {
+
+
+        if (loginform.first_name && loginform.last_name && loginform.email && !errors.email && !errors.fileMessage) {
             dispatch({
                 type: AuthTypes.POST_REQUEST,
                 data: loginform,
@@ -88,6 +108,7 @@ const ModelforAdd = () => {
             });
         }
         setData({ ...data, errors: errors })
+        setData({ ...data, loginform: { ...data, loginform: '' } })
     }
 
     return (
@@ -148,7 +169,18 @@ const ModelforAdd = () => {
                             errors.email &&
                             <span style={{ color: "red" }}>{errors.email}</span>
                         }
-                       
+
+                        <div className="main">
+
+                            <div onClick={uploadClick}>
+                                <a href="#" >Add File</a>
+                                <span>or drop profile picture here</span>
+                                <input type="file" hidden id="profile-pic" name='avatar' onChange={saveImage} ref={ref} accept="application/pdf,image/jpeg,image/png" />
+                                {
+                                    errors.fileMessage && <div style={{ color: "red" }}>{errors.fileMessage}</div>
+                                }
+                            </div>
+                        </div>
                     </Form>
                 </Modal.Body>
                 <Modal.Footer>
