@@ -1,0 +1,56 @@
+.user_dts {
+
+    width: 200px;
+    height: 200px;
+    text-align: center;
+    padding-top: 20px;
+    font-weight: bold;
+}
+
+.user_dtsr {
+
+    color: blue;
+    text-align: center;
+    padding-top: 20px;
+    font-weight: bold;
+}
+
+.center {
+    margin: auto;
+    padding: 10px;
+
+}
+
+.text {
+    padding: 5px;
+}
+
+.text2 {
+    padding-right: -10px;
+}
+
+table th {
+    text-align: center;
+}
+
+th {
+    margin-right: -20px !important;
+}
+
+.table {
+    margin: auto;
+    width: 50% !important;
+}
+
+.login_btn {
+    display: flex;
+    justify-content: center;
+}
+
+.center2 {
+    display: flex;
+    justify-content: center;
+    position: fixed;
+    bottom: 150px;
+    left: 600px;
+}
